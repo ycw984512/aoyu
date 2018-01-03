@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-param" content="_csrf">
+    <meta name="csrf-token" content="ekxNLWRjWGEQDwIVDyUrKBY0fBkxNStSOTobaRAFAgwsKAZnIiU9JA==">
+    <title>首页_傲宇机构版</title>
+    <meta name="description" content="★傲宇★论文检测-全球首个中文论文相似度检测网站;提供论文查重,免费论文检测系统,毕业论文抄袭检测。最权威,动态指纹技术保障,已服务超300万人论文检测。"/>
+    <meta name="keywords" content="论文,论文检测,论文查重,免费论文检测,检测系统,论文抄袭,毕业论文"/>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+<link href="../css/orgbefore.css" rel="stylesheet">    <script src="../js/html5-label.js"></script>
+</head>
+<body id="body_login" style="*position: absolute;*top:0;">
+<div id="org_top">
+    <div class="concenter bgimg_org">
+        <div class="top_con z_higher">
+            <div class="toplogo pull-left">
+
+                       <a href="/" class="topimgsize"></a>
+                    <img src="../images/logo_org.png" class="ML16">
+
+            </div>
+                            <div class="topbtn pull-right">
+                    <a href="/login" class="btn_login">登录</a>
+
+                </div>
+                        <nav class="topnav pull-right">
+                <a href="../index.html">首页</a>
+                <a href="../index.html" target="_blank">个人版</a>
+
+        </div>
+                        <div class="clearfix z_higher" id="org_frm">
+            <div class="org_sign_frm pull-right p-rel ">
+                <h3>机构版登录</h3>
+                <!--我是错误信息 begin -->
+                <div id="userErro" class="pophover"><p>用户名或密码错误</p></div>
+                <div id="capErro" class="pophover"><p>验证码不正确</p></div>
+                <!--我是错误信息 end -->
+                <form id="org_sign" action="/" method="post" role="form">
+<input type="hidden" name="_csrf" value="ekxNLWRjWGEQDwIVDyUrKBY0fBkxNStSOTobaRAFAgwsKAZnIiU9JA==">                <div class="form-group field-loginform-username required">
+<input type="text" id="loginform-username" class="form-control" name="LoginForm[username]" placeholder="请输入您的用户名">
+                        <img src="../images/inp_user.png" class="input_flag">
+</div>                <div class="form-group field-loginform-password required">
+<input type="password" id="loginform-password" class="form-control" name="LoginForm[password]" value="" placeholder="请输入您的密码"><img src="../images/inp_lock.png" class="input_flag">
+
+</div>                <div class="form-group field-loginform-rememberme">
+<div class="input-check"><input type="hidden" name="LoginForm[rememberMe]" value="0"><input type="checkbox" id="loginform-rememberme" name="LoginForm[rememberMe]" value="1" checked><a class="forgetpwd pull-right" href="/pwd">忘记密码？</a><label for="loginform-rememberme">&nbsp;下次自动登录</label></div>
+</div>                <div class="form-group field-loginform-captcha required">
+<div class="input-prov"><input type="text" id="loginform-captcha" class="form-control" name="LoginForm[captcha]" value="" placeholder="请输入验证码" autocomplete="off"><img id="loginform-captcha-image" src="../images/captcha.png" alt="换一个" title="换一个"></div>
+</div>                <img src="../images/sign_shadow.png" class="sign_shadow">
+                <button type="submit" id="btn_home_login" class="btn sub_login">登录</button>                </form>
+            </div>
+        </div>
+
+        <div class="line-txt z_higher">
+            <div class="line pull-left"></div>
+            <p class="pull-left">专为企业检测量身定做</p>
+            <div class="line pull-left"></div>
+        </div>
+        <div id="org_video">
+            <!-- <video width="1190" height="697" autoplay="autoplay" src="../images/banneranim.mp4">
+                <img src="../images/org.jpg">
+            </video> -->
+            <img src="../images/org.jpg">        </div>
+    </div>
+</div>
+
+</body>
+</html>
+        <script src="../js/jquery-1.9.1.min.js"></script>
+<script src="../js/yii.js"></script>
+<script src="../js/yii.validation.js"></script>
+<script src="../js/yii.captcha.js"></script>
+<script src="../js/yii.activeForm.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/org_validate.js"></script>
+<script type="text/javascript">jQuery(document).ready(function () {
+$('#org_sign').on('afterValidateAttribute',function (event, attribute, messages){
+    $('#capErro').hide();
+    $('#userErro').hide();
+    if (attribute.name == 'captcha' && (typeof messages[0]) == 'string'){
+        $('#capErro').show();
+    }else if ((attribute.name == 'username' || attribute.name == 'password') && (typeof messages[0]) == 'string'){
+        $('#userErro').show();
+    }
+}).on('afterValidate',function (event, messages, errorAttributes){
+    $('#capErro').hide();
+    $('#userErro').hide();
+    if (errorAttributes.length > 0){
+        for (i in errorAttributes){
+            if (errorAttributes[i].name == 'username'){
+                $('#userErro').show();
+            }else if (errorAttributes[i].name == 'captcha'){
+                $('#capErro').show();
+            }
+        }
+    }
+});
+
+jQuery('#loginform-captcha-image').yiiCaptcha({"refreshUrl":"\/site\/captcha?refresh=1","hashKey":"yiiCaptcha\/site\/captcha"});
+jQuery('#org_sign').yiiActiveForm([{"id":"loginform-username","name":"username","container":".field-loginform-username","input":"#loginform-username","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"用户名不能为空"});yii.validation.string(value, messages, {"message":"用户名必须是一条字符串","min":2,"tooShort":"用户名应该包含至少2个字符","max":20,"tooLong":"用户名只能包含至多20个字符","skipOnEmpty":1});}},{"id":"loginform-password","name":"password","container":".field-loginform-password","input":"#loginform-password","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"密码不能为空"});yii.validation.string(value, messages, {"message":"密码必须是一条字符串","min":6,"tooShort":"密码应该包含至少6个字符","max":20,"tooLong":"密码只能包含至多20个字符","skipOnEmpty":1});}},{"id":"loginform-rememberme","name":"rememberMe","container":".field-loginform-rememberme","input":"#loginform-rememberme","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.boolean(value, messages, {"trueValue":"1","falseValue":"0","message":"Remember Me的值必须要么为\"1\"，要么为\"0\"","skipOnEmpty":1});}},{"id":"loginform-captcha","name":"captcha","container":".field-loginform-captcha","input":"#loginform-captcha","error":".help-block.help-block-error","validate":function (attribute, value, messages, deferred, $form) {yii.validation.required(value, messages, {"message":"验证码不能为空"});yii.validation.captcha(value, messages, {"hash":765,"hashKey":"yiiCaptcha/site/captcha","caseSensitive":false,"message":"验证码不正确"});}}], []);
+});</script></body>
+<!--[if lte IE 9]>
+<script type="text/javascript" src="/js/placeholder.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // Invoke the plugin
+        $('input, textarea').placeholder();
+    });
+</script>
+<![endif]-->
+</html>
